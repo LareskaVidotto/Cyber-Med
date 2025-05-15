@@ -1,0 +1,124 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="welcome-container">
+    <h2>Bem-vindo ao Sistema Médico</h2>
+    
+    <div class="clinic-info">
+        <h3>{{ current_user.clinic_name }}</h3>
+        <p class="clinic-details">
+            <i class="fas fa-map-marker-alt"></i> {{ current_user.address }}<br>
+            <i class="fas fa-phone"></i> {{ current_user.phone }}<br>
+            <i class="fas fa-envelope"></i> {{ current_user.email }}
+        </p>
+    </div>
+    
+    <div class="clinic-images">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d" alt="Clínica" class="clinic-image">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118" alt="Consultório" class="clinic-image">
+        <img src="https://images.unsplash.com/photo-1580281780460-82d277b0e3f8" alt="Equipamentos" class="clinic-image">
+    </div>
+
+    <div class="services-section">
+        <h3>Nossos Serviços</h3>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-calendar-check"></i>
+                <h4>Agendamento Online</h4>
+                <p>Sistema prático para marcação de consultas</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-user-md"></i>
+                <h4>Atendimento Especializado</h4>
+                <p>Profissionais qualificados</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-file-medical"></i>
+                <h4>Prontuário Digital</h4>
+                <p>Gestão segura de informações médicas</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.welcome-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.clinic-info {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.clinic-details {
+    text-align: left;
+    margin: 15px 0;
+    line-height: 1.8;
+}
+
+.clinic-details i {
+    width: 20px;
+    color: #795548;
+}
+
+.clinic-images {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.clinic-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.clinic-image:hover {
+    transform: scale(1.05);
+}
+
+.services-section {
+    margin-top: 40px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.service-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.service-card i {
+    font-size: 2em;
+    color: #795548;
+    margin-bottom: 15px;
+}
+
+.service-card h4 {
+    color: #4a4a4a;
+    margin: 10px 0;
+}
+
+.service-card p {
+    color: #666;
+}
+</style>
+{% endblock %}

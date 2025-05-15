@@ -1,0 +1,109 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="patients-container">
+    <h2>Pacientes</h2>
+    <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-input" id="searchPatients" placeholder="Pesquisar pacientes..." onkeyup="searchItems('searchPatients', '.patient-card')">
+    </div>
+    <a href="{{ url_for('add_patient') }}" class="btn">Cadastrar Novo Paciente</a>
+    
+    <div class="patients-list">
+        {% for patient in patients %}
+        <div class="patient-card">
+            <div class="patient-info">
+                <h3>{{ patient.name }}</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-user-clock"></i>
+                        <span><strong>Idade:</strong> {{ patient.age }} anos</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-id-card"></i>
+                        <span><strong>Documento:</strong> {{ patient.document }}</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span><strong>Telefone:</strong> {{ patient.phone }}</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><strong>Endereço:</strong> {{ patient.address }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-actions">
+                <a href="{{ url_for('patient_details', id=patient.id) }}" class="btn-details">
+                    <i class="fas fa-clipboard-list"></i> Ver Detalhes
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.patients-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.patient-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+.patient-card:hover {
+    transform: translateY(-2px);
+}
+
+.patient-info h3 {
+    color: #2196F3;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-item i {
+    color: #666;
+    width: 20px;
+}
+
+.patient-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-details {
+    background: #2196F3;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-details:hover {
+    background: #1976D2;
+}
+</style>
+{% endblock %}

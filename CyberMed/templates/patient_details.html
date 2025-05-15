@@ -1,0 +1,37 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="patient-details">
+    <h2>{{ patient.name }}</h2>
+    <div class="info-section">
+        <h3>Informações Pessoais</h3>
+        <p><strong>Idade:</strong> {{ patient.age }}</p>
+        <p><strong>Documento:</strong> {{ patient.document }}</p>
+        <p><strong>Endereço:</strong> {{ patient.address }}</p>
+        <p><strong>Telefone:</strong> {{ patient.phone }}</p>
+    </div>
+
+    <div class="records-section">
+        <h3>Prontuários</h3>
+        {% for record in patient.records|sort(attribute='record_date', reverse=true) %}
+        <div class="record-card">
+            <p><strong>Data:</strong> {{ record.record_date.strftime('%d/%m/%Y %H:%M') }}</p>
+            <p><strong>Diagnóstico:</strong> {{ record.diagnosis }}</p>
+            <p><strong>Tratamento:</strong> {{ record.treatment }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="appointments-section">
+        <h3>Consultas</h3>
+        {% for appointment in patient.appointments|sort(attribute='date') %}
+        <div class="appointment-card">
+            <p><strong>Data:</strong> {{ appointment.date.strftime('%d/%m/%Y') }}</p>
+            <p><strong>Horário:</strong> {{ appointment.time_slot }}</p>
+            <p><strong>Médico:</strong> {{ appointment.doctor }}</p>
+            <p><strong>Status:</strong> {% if appointment.confirmed %}Confirmada{% else %}Pendente{% endif %}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

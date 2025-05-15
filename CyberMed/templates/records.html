@@ -1,0 +1,98 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="records-container">
+    <h2>Prontuários Médicos</h2>
+    
+    <form method="POST" action="{{ url_for('add_record') }}" class="record-form">
+        <div class="form-group">
+            <label>Paciente:</label>
+            <select name="patient_id" required>
+                <option value="">Selecione um paciente</option>
+                {% for patient in patients %}
+                <option value="{{ patient.id }}">{{ patient.name }} - {{ patient.document }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Diagnóstico:</label>
+            <textarea name="diagnosis" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Tratamento:</label>
+            <textarea name="treatment" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn">Salvar Prontuário</button>
+    </form>
+
+    <div class="records-list">
+        {% for record in records %}
+        <div class="record-card">
+            <h3>{{ record.patient.name }}</h3>
+            <p><strong>Data:</strong> {{ record.record_date.strftime('%d/%m/%Y %H:%M') }}</p>
+            <p><strong>Diagnóstico:</strong> {{ record.diagnosis }}</p>
+            <p><strong>Tratamento:</strong> {{ record.treatment }}</p>
+            <div class="card-actions">
+                <a href="{{ url_for('edit_record', id=record.id) }}" class="btn-edit">Editar</a>
+                <a href="{{ url_for('delete_record', id=record.id) }}" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este prontuário?')">Excluir</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.records-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.record-form {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.records-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.record-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.record-card:hover {
+    transform: translateY(-2px);
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-edit, .btn-delete {
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-edit {
+    background: #4CAF50;
+}
+
+.btn-delete {
+    background: #f44336;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="records-container">
+    <h2>Registro de Acessos</h2>
+    <div class="search-container">
+        <input type="text" id="searchLogs" class="search-input" placeholder="Pesquisar logs..." onkeyup="searchItems('searchLogs', '.record-card')">
+    </div>
+    <div class="records-list">
+        {% for log in logs %}
+        <div class="record-card">
+            <p><strong>Usuário:</strong> {{ log.username }}</p>
+            <p><strong>Data/Hora:</strong> {{ log.access_date.strftime('%d/%m/%Y %H:%M:%S') }}</p>
+            <p><strong>Status:</strong> <span class="{{ 'success' if log.success else 'error' }}">{{ 'Sucesso' if log.success else 'Falha' }}</span></p>
+            <p><strong>IP:</strong> {{ log.ip_address }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.success { color: green; }
+.error { color: red; }
+.record-card {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.search-container {
+    margin-bottom: 20px;
+}
+</style>
+{% endblock %}

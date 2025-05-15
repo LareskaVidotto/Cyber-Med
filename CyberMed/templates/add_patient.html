@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <h2>Cadastro de Paciente</h2>
+    <form method="POST" class="patient-form">
+        <div class="form-group">
+            <label>Nome:</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+            <label>Idade:</label>
+            <input type="number" name="age" required>
+        </div>
+        <div class="form-group">
+            <label>Documento (CPF/RG):</label>
+            <input type="text" name="document" required>
+        </div>
+        <div class="form-group">
+            <label>Endereço:</label>
+            <input type="text" name="address" required>
+        </div>
+        <div class="form-group">
+            <label>Telefone:</label>
+            <input type="tel" name="phone" required>
+        </div>
+        <button type="submit" class="btn">Cadastrar Paciente</button>
+    </form>
+</div>
+{% endblock %}
